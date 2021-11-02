@@ -1,56 +1,94 @@
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine, world;
-var backgroundImg;
-var hour;
-
-var bg = "sunrise.png";
+var box1, box2, box3,box4,box5,box6,box7,box8,box9,box10,box11,box12,box13,box14,box15,box16,box17,box18,box19,box20,box21,box22,box23,box24,box25,box26;
+var hero,monster,rope,ground;
 
 function preload() {
-    getBackgroundImg();
-    
+  bg = loadImage("background.png");
 }
 
-function setup(){
-    var canvas = createCanvas(1200,700);
-    engine = Engine.create();
-    world = engine.world;
+function setup() {
+  createCanvas(1400, 800);
+  engine = Engine.create();
+  world = engine.world;
+
+  ground = new Ground(600, 600, 1200, 20);
+
+  hero = new Hero(400,800,250);
+  rope = new Rope(hero.body, { x: 500, y: 50 });
+  monster = new Monster(1100,550,300);
+
+  box1 = new Box(600, 200, 70, 70);
+  box2 = new Box(900, 200, 70, 70);
+  box3 = new Box(900, 200, 70, 70);
+  box4 = new Box(900, 200, 70, 70);
+  box5 = new Box(900, 200, 70, 70);
+  box6 = new Box(900, 200, 70, 70);
+  box7 = new Box(800, 200, 70, 70);
+  box8 = new Box(800, 200, 70, 70);
+  box9 = new Box(800, 100, 70, 70);
+  box10 = new Box(800, 200, 70, 70);
+  box11 = new Box(800, 200, 70, 70);
+  box12 = new Box(800, 200, 70, 70);
+  box13 = new Box(800, 100, 70, 70);
+  box14 = new Box(800, 200, 70, 70);
+  box15 = new Box(700, 200, 70, 70);
+  box16 = new Box(700, 200, 70, 70);
+  box17 = new Box(700, 100, 70, 70);
+  box18 = new Box(700, 100, 70, 70);
+  box19 = new Box(700, 100, 70, 70);
+  box20 = new Box(700, 100, 70, 70);
+  box21 = new Box(600, 100, 70, 70);
+  box22 = new Box(600, 100, 70, 70);
+  box23 = new Box(600, 100, 70, 70);
+  box24 = new Box(600, 100, 70, 70);
+  box25 = new Box(600, 100, 70, 70);
+  box26 = new Box(600, 100, 70, 70);
 
 }
 
-function draw(){
-    if(backgroundImg)
-        background(backgroundImg);
+function draw() {
+  background(bg);
+  Engine.update(engine);
+  ground.display();
+  box1.display();
+  box2.display();
+  box3.display();
+  box4.display()
+  box5.display()
+  box6.display()
+  box7.display()
+  box8.display()
+  box9.display()
+  box10.display()
+  box11.display()
+  box12.display()
+  box13.display()
+  box14.display()
+  box15.display()
+  box16.display()
+  box17.display()
+  box18.display()
+  box19.display()
+  box20.display()
+  box21.display()
+  box22.display()
+  box23.display()
+  box24.display()
+  box25.display()
+  box26.display()
 
-    Engine.update(engine);
-
-    fill("black");
-    textSize(30);
-    
-    if(hour>=12){
-        text("Time : "+ hour%12 + " PM", 50,100);
-    }else if(hour==0){
-        text("Time : 12 AM",100,100);
-    }else{
-        text("Time : "+ hour%12 + " AM", 50,100);
-    }
+  hero.display();
+  rope.display();
+  monster.display();
 
 }
 
-async function getBackgroundImg(){
-    var response=await fetch("https://worldtimeapi.org/api/timezone/Asia/kolkata");
-    var responseJSON=await response.json();
-    var dateTime=responseJSON.datetime;
-     hour=dateTime.slice(11,13);
-    if(hour>= 6 && hour<=17){
-        bg="sunrise.png";
-    }
-    else{
-        bg="sunset.png";
-    }
-    backgroundImg=loadImage(bg)
+function mouseDragged() {
+  Matter.Body.setPosition(hero.body, { x:mouseX, y: mouseY});
 }
- 
+
